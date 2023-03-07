@@ -31,6 +31,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useRouter } from 'next/router';
+import Loginbox from '../../components/user/Loginbox';
 
 // Form Validation with Yup
 
@@ -101,144 +102,8 @@ const Login = () => {
         <Container maxWidth="lg">
           <Box sx={loginStyles.center}>
             <Box sx={loginStyles.box}>
-              <Box sx={loginStyles.right}>
-                <Typography
-                  variant="h4"
-                  sx={[loginStyles.center, loginStyles.title]}
-                >
-                  Login <Image src={yeah} alt="yeah" width={30} height={30} />
-                </Typography>
+              <Loginbox />
 
-                <Box sx={loginStyles.socials}>
-                  <Button
-                    variant="outlined"
-                    sx={[loginStyles.center, loginStyles.button]}
-                    fullWidth
-                  >
-                    <Image src={google} alt="google" width={20} height={20} />
-                    Login with Google
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={[loginStyles.center, loginStyles.button]}
-                    fullWidth
-                  >
-                    <Image src={fb} alt="fb" width={25} height={25} />
-                    Login with Facebook
-                  </Button>
-                </Box>
-                <Box sx={loginStyles.dividerContainer}>
-                  <Divider sx={loginStyles.divider} />{' '}
-                  <Typography variant="body1" sx={{ mx: 2 }}>
-                    {' '}
-                    or{' '}
-                  </Typography>
-                  <Divider sx={loginStyles.divider} />
-                </Box>
-                {al?.show && (
-                  <Alert
-                    severity="error"
-                    onClose={() => setAlert(null)}
-                    sx={loginStyles.alert}
-                  >
-                    {al.msg}
-                  </Alert>
-                )}
-                <Box
-                  component="form"
-                  sx={loginStyles.form}
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <Controller
-                    name="email"
-                    control={control}
-                    rules={{
-                      required: true,
-                    }}
-                    render={({ field, fieldState: { error } }) => (
-                      <TextField
-                        {...field}
-                        error={!!error}
-                        id="email"
-                        label="Email"
-                        variant="outlined"
-                        size="small"
-                        type="email"
-                        fullWidth
-                        sx={loginStyles.input}
-                        helperText={error?.message}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton>
-                                <MailOutlineIcon />
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="password"
-                    control={control}
-                    rules={{
-                      required: true,
-                    }}
-                    render={({ field, fieldState: { error } }) => (
-                      <TextField
-                        {...field}
-                        error={!!error}
-                        id="password"
-                        label="Password"
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        sx={loginStyles.input}
-                        helperText={error?.message}
-                        InputProps={{
-                          type: showPassword ? 'text' : 'password',
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={() => setShowPassword(!showPassword)}
-                              >
-                                {showPassword ? (
-                                  <VisibilityIcon />
-                                ) : (
-                                  <VisibilityOffIcon />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                  />
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      textAlign: 'right',
-                      width: '100%',
-                      paddingRight: '1rem',
-                    }}
-                  >
-                    <Link href="/forgot-password" underline="hover">
-                      Forgot Password?
-                    </Link>{' '}
-                  </Typography>
-
-                  <Button
-                    sx={[loginStyles.button, loginStyles.submit]}
-                    variant="contained"
-                    fullWidth
-                    type="submit"
-                  >
-                    Login
-                  </Button>
-                </Box>
-              </Box>
               <Box sx={loginStyles.subtract}>
                 <Image
                   src={subtract}

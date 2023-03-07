@@ -33,8 +33,10 @@ import FooterLte from '../../components/layout/FooterLte';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { fetchCourse } from '../../api/rest';
+import AuthModal from '../../components/user/AuthModal';
 
 const Detailb = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
     //console.info('You clicked a breadcrumb.');
@@ -85,6 +87,13 @@ const Detailb = () => {
     modified: updatedOn,
     brief,
   };
+  const _join = () => {
+    // user is login and course is free add to meta and redirect to course
+    // user is login and course is paid redirect to payment
+    // user is not login and course is free redirect to  and go to close when reg successful
+    setOpen((o) => !o);
+    //setOpen(true);
+  };
   return (
     <>
       <DashboardHeader />
@@ -129,7 +138,12 @@ const Detailb = () => {
               <Typography variant="h6" className="mb-4">
                 ${(data?.price || 0) - (data?.tax || 0)}
               </Typography>
-              <Button variant="outlined" fullWidth endIcon={<ShoppingCart />}>
+              <Button
+                variant="outlined"
+                fullWidth
+                endIcon={<ShoppingCart />}
+                onClick={_join}
+              >
                 Join Class
               </Button>
               <Divider />
@@ -213,6 +227,7 @@ const Detailb = () => {
             </Paper>
           </div>
         </div>
+        <AuthModal open={open} _open={_join} />
       </Container>
       <FooterLte />
     </>
